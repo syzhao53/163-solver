@@ -113,8 +113,9 @@ function Home({ currPage, setCurrPage }) {
         <div className="input-flex">
         <img id="illus" src={illustration} alt="landing illustration" />
 
-          <form className="input-form" id="solver-form"  onSubmit={solveForm}>
+          <form className="input-form" id="solver-form">
             <div className="big-header">
+<img id="leaf-icon" src={Leaf} alt="leaf icon" onClick={async () => {navigate('/');}}/>
               163 SOLVER
             </div>
             {/* <div className="instr">
@@ -133,7 +134,7 @@ function Home({ currPage, setCurrPage }) {
             {/* <div id="error">{error.message}</div> */}
             <div className="submit-btn">
               <button type="button" id="clear" onClick={resetForm}>RESET</button>
-              <input type="submit" id="download" value="SOLVE"></input>
+              <button type="button" id="download" onClick={solveForm}>SOLVE</button>
             </div>
             <div id="error">{error.message}</div>
             <div id="solution">{solution}</div>
