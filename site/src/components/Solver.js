@@ -13,21 +13,12 @@ export const aStar = (arr) => {
     frontier.enqueue([arr, 0]);
     costSoFar[JSON.stringify(arr)] = 0;
 
-    var ctr = 0;
-
     while (frontier.size() != 0) {
-    // while (ctr < 3) {
-        ctr += 1;
-        console.log("NOT EMPTY");
         // get top element of frontier priority queue
-        console.log("PRINT COLLEC");
         frontier.printCollection();
-        console.log("LENGTH ??: " + frontier.size());
         const currNode = frontier.dequeue();
-        console.log("CURRNODE: " + JSON.stringify(currNode));
 
         if (!visited.has(currNode)) {
-            console.log("NOT VISITED");
             visited.add(currNode);
 
             // if (JSON.stringify(currNode) in costSoFar) {
@@ -48,20 +39,14 @@ export const aStar = (arr) => {
 
             // solved condition check
             if (is_solved(currNode)) {
-                console.log("SOLVED CONDITION YAY");
-
                 return moves[JSON.stringify(currNode)];
             }
 
             // arr of successor arrs with computed items
             const successRes = successors(currNode);
-            console.log("PRINT SUCCESSORS: " + JSON.stringify(successRes));
-
 
             // iterate over successors of current array
             for (var i = 0; i < successRes.length; i += 1) {
-                console.log("IN SUCCESS LOOP");
-
                 // current successor
                 const currS = successRes[i][0];
                 const newCost = costSoFar[JSON.stringify(currNode)] + 1;
@@ -78,7 +63,6 @@ export const aStar = (arr) => {
 
                     costSoFar[JSON.stringify(currS)] = newCost;
                     const priority = newCost + heur(successRes[i][0]);
-                    console.log("PRIORITY: " + priority);
                     // const priority = newCost + heur(successRes[i][1]);
 
                     frontier.enqueue([currS, priority]);
@@ -190,7 +174,6 @@ const heur = (arr) => {
     // should it actually be the largest value in the array subtracted from 163
 
     // return Math.abs(163 - val);
-    console.log("PRIOR ARR: " + JSON.stringify(arr));
     return Math.abs(163 - Math.max(...arr));
 }
 
