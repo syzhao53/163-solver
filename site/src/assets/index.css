@@ -50,6 +50,10 @@ html {
     }
   }
 
+#error {
+  color: rgb(219, 30, 71);
+}
+
 .input-form {
   justify-content: flex-start;
   display: flex;

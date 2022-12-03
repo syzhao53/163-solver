@@ -3,6 +3,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
+import { aStar, choose } from './Solver';
 import { useNavigate } from 'react-router-dom';
 import '../assets/index.css';
 import illustration from '../assets/163-illus.png'
@@ -35,6 +36,7 @@ function Home({ currPage, setCurrPage }) {
   // };
 
   const [error, setError] = useState({ message: '' });
+  const [solution, setSolution] = useState('');
   const [one, setOne] = useState('');
   const [two, setTwo] = useState('');
   const [three, setThree] = useState('');
@@ -47,8 +49,14 @@ function Home({ currPage, setCurrPage }) {
 
   const convert = (s) => {
     s = s.trim();
+    
 
-    if (s == 'j' || s == 'J') {
+    if (s == '1' || s == '2' || s == '3' ||
+    s == '4' || s == '5' || s == '6' || s == '7'
+    || s == '8' || s == '9' || s == '10' || s == '11'
+    || s == '12' || s == '13') {
+      return parseInt(s);
+    } else if (s == 'j' || s == 'J') {
       return 11;
     } else if (s == 'q' || s == 'Q') {
       return 12;
@@ -57,7 +65,7 @@ function Home({ currPage, setCurrPage }) {
     } else if (s == 'a' || s == 'A') {
       return 1;
     } else {
-      return parseInt(s);
+      return null;
     }
   }
   const solveForm = (event) => {
@@ -70,8 +78,17 @@ function Home({ currPage, setCurrPage }) {
     const fiveInt = convert(five);
     const sixInt = convert(six);
 
-    const total = oneInt + twoInt;
-    setError({ message: 'Please enter your login credentials' + total });
+    console.log(choose([0,1,2,3,4,5], 2));
+
+    if (oneInt == null || twoInt == null || threeInt == null
+      || fourInt == null || fiveInt == null || sixInt == null) {
+        setError({ message: 'Please enter six valid values'});
+    } else {
+      const total = oneInt + twoInt;
+      setError({ message: ''});
+      setSolution('' + total);
+    }
+
   }
   
   // const form = document.getElementById('solver-form');
@@ -116,6 +133,7 @@ function Home({ currPage, setCurrPage }) {
             <div className="submit-btn">
               <input type="submit" id="download" value="SOLVE"></input>
             </div>
+            <div id="solution">{solution}</div>
           </form>
         </div>
       </div>
