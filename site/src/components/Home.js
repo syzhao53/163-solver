@@ -78,8 +78,6 @@ function Home({ currPage, setCurrPage }) {
     const fiveInt = convert(five);
     const sixInt = convert(six);
 
-    console.log(choose([0,1,2,3,4,5], 2));
-
     if (oneInt == null || twoInt == null || threeInt == null
       || fourInt == null || fiveInt == null || sixInt == null) {
         setError({ message: 'Please enter six valid values'});
