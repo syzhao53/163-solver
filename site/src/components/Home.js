@@ -77,7 +77,7 @@ function Home({ currPage, setCurrPage }) {
     const fiveInt = convert(five);
     const sixInt = convert(six);
 
-    console.log(successors([1, 2, 3, 4, 5, 6]));
+    console.log(aStar([1, 2, 3, 4, 5, 12]));
 
     if (oneInt == null || twoInt == null || threeInt == null
       || fourInt == null || fiveInt == null || sixInt == null) {
