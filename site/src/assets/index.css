@@ -83,7 +83,7 @@ html {
   /* width: 79%; */
   margin: auto;
   /* background-color: red; */
-  height: 1.75rem;
+  height: 2rem;
   margin-bottom: 1rem;
   margin-top: 2rem;
 }
@@ -94,7 +94,7 @@ html {
   /* width: 79%; */
   margin: auto;
   /* background-color: red; */
-  height: 1.75rem;
+  height: 2rem;
   /* margin-bottom: 4rem; */
 }
 
@@ -135,6 +135,7 @@ html {
   border-style: solid;
   border-width: 1.75px;
   margin: 0 1rem 0 0;
+  text-align: center;
 }
 
 .input-r {
@@ -144,6 +145,7 @@ html {
   border-style: solid;
   border-width: 1.75px;
   margin: 0;
+  text-align: center;
 }
 
 input:focus {
@@ -1438,11 +1440,21 @@ ul {
     display: none;
   }
 
+  .input-in {
+    border-width: 2px;
+    font-size: 1.25rem;
+  }
+
+  .input-r {
+    border-width: 2px;
+    font-size: 1.25rem;
+  }
+
   #leaf-icon {
     display: block;
-    width: 7%;
+    width: 9%;
     float: left;
-    margin: 0 .6rem 0 0;
+    margin: 0 .55rem 0 0;
   }  
 
   .footer-wrap {
@@ -1488,7 +1500,7 @@ ul {
     width: 79%;
     /* background-color: pink; */
     margin: auto;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     align-items: flex-start;
   }
 
@@ -1501,42 +1513,58 @@ ul {
   }
 
   .input-row {
-    height: 2rem;
+    height: 3rem;
   }
 
   .input-row-b {
-    height: 2rem;
+    height: 3rem;
+  }
+
+  #clear {
+    margin: 0 1rem 0 0;
+    font-size: .9rem;
+    font-weight: 550;
+    letter-spacing: .5px;;
+    /* background-color: #033E57;
+    color: #FCFCFF;  */
+    background-color: #FCFCFF;
+    color: #033E57; 
+    border: 1.75px;
+    border-style: solid;
+    padding: .85rem 2.2rem .85rem 2.2rem;
+    border-radius: 100px;
+    text-decoration: none;
   }
 
 
 #download {
   margin: 0 0 2rem 0;
-  font-size: .8rem;
+  font-size: .9rem;
   font-weight: 550;
   letter-spacing: .5px;;
   /* background-color: #033E57;
   color: #FCFCFF;  */
   background-color: #033E57;
   color: #FCFCFF;  
-  border: 1.5px;
+  border: 1.75px;
   border-style: solid;
-  padding: .75rem 2.2rem .75rem 2.2rem;
+  padding: .85rem 2.2rem .85rem 2.2rem;
   border-radius: 100px;
   text-decoration: none;
 }
 
 #download:hover {
   margin: 0 0 2rem 0;
-  font-size: .8rem;
+  font-size: .9rem;
   font-weight: 550;
   letter-spacing: .5px;;
   /* background-color: #033E57;
   color: #FCFCFF;  */
   background-color: #033E57;
   color: #FCFCFF;  
-  border: 1.5px;
+  border: 1.75px;
   border-style: solid;
-  padding: .75rem 2.2rem .75rem 2.2rem;
+  padding: .85rem 2.2rem .85rem 2.2rem;
   border-radius: 100px;
   text-decoration: none;
 }
