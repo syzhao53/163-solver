@@ -15,7 +15,6 @@ export const aStar = (arr) => {
 
     while (frontier.size() != 0) {
         // get top element of frontier priority queue
-        frontier.printCollection();
         const currNode = frontier.dequeue();
 
         if (!visited.has(currNode)) {

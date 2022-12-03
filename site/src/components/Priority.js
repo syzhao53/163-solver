@@ -9,7 +9,6 @@ export function PriorityQueue() {
 
     this.enqueue = function (newMem) {
         if (this.isEmpty()) {
-            console.log("PUSHED" + JSON.stringify(newMem));
             array.push(newMem);
         } else {
             var added = false;
@@ -29,9 +28,7 @@ export function PriorityQueue() {
     };
 
     this.dequeue = function () {
-        var value = array.shift();
-        console.log("DEQUEUE: " + JSON.stringify(value));
-        
+        var value = array.shift();        
         return value[0];
     };
 
