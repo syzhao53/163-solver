@@ -3,7 +3,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
-import { aStar, choose } from './Solver';
+import { aStar, choose, successors} from './Solver';
 import { useNavigate } from 'react-router-dom';
 import '../assets/index.css';
 import illustration from '../assets/163-illus.png'
@@ -69,7 +69,6 @@ function Home({ currPage, setCurrPage }) {
     }
   }
   const solveForm = (event) => {
-    // log.textContent = 'Form Submitted! Time stamp: ${event.timeStamp}';
     event.preventDefault();
     const oneInt = convert(one)
     const twoInt = convert(two);
@@ -77,6 +76,8 @@ function Home({ currPage, setCurrPage }) {
     const fourInt = convert(four);
     const fiveInt = convert(five);
     const sixInt = convert(six);
+
+    console.log(successors([1, 2, 3, 4, 5, 6]));
 
     if (oneInt == null || twoInt == null || threeInt == null
       || fourInt == null || fiveInt == null || sixInt == null) {
@@ -88,10 +89,6 @@ function Home({ currPage, setCurrPage }) {
     }
 
   }
-  
-  // const form = document.getElementById('solver-form');
-  // const log = document.getElementById('log');
-  // form.addEventListener('submit', solveForm);
 
   useEffect(() => {
     setCurrPage('work');
@@ -135,7 +132,7 @@ function Home({ currPage, setCurrPage }) {
           </form>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

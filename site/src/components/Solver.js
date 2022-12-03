@@ -5,42 +5,76 @@
 export const aStar = (v1, v2, v3, v4, v5, v6) => {
     return 0;
 }
-const successors = (arr) => {
+export const successors = (arr) => {
     // get all possible n choose 2 options
     const choices = choose(arr, 2);
 
     // successors
     const results = [];
-    
-    // copy of original input arr
-    const copy = arr.map(a => {return {...a}}) // ?
 
-    for (i = 0; i < choices.length; i += 1) {
+    // console.log("CHOICES: " + JSON.stringify(choices));
+
+    for (var i = 0; i < choices.length; i += 1) {
         const opsRes = ops(choices[i]);
+        // console.log(opsRes);
 
-        for (j = 0; j < opsRes.length; j += 1) {
-            // remove the 2 elements from arr
-            // add new element from opsRes
-            // add new array to results
+        for (var j = 0; j < opsRes.length; j += 1) {
+            const newArr = [];
+
+            for (var k = 0; k < arr.length; k += 1) {
+                // copy array but without the two elements chosen
+                if ((arr[k] != choices[i][0]) && (arr[k] != choices[i][1])) {
+                    newArr.push(arr[k]);
+                }
+            }
+
+            // console.log("NEW ARR: " + JSON.stringify(newArr));
+
+            // add newly computed val
+            newArr.push(opsRes[j]);
+            // console.log("NEW ARR2: " + JSON.stringify(newArr));
+
+            results.push(newArr);
         }
     }
 
+    // how do you track the operation that's done when you want to display the final solution path
+    // should newly computed val from ops arr also be returned (tuple of val and newArr?)
     return results;
 }
 
 const ops = (arr) => {
     const results = [];
+    const sum = arr[0] + arr[1];
+    const diff = Math.abs(arr[0] - arr[1]);
+    const mult = arr[0] * arr[1];
 
-    results.push(arr[0] + arr[1]);
-    results.push(Math.abs(arr[0] - arr[1]));
-    results.push(arr[0] * arr[1]);
+    if (!results.includes(sum)) {
+        results.push(sum);
+    }
+
+    if (!results.includes(diff)) {
+        results.push(diff);
+    }
+
+    if (!results.includes(mult)) {
+        results.push(mult);
+    }
     
     if (arr[0] % arr[1] == 0) {
-        results.push(arr[0] / arr[1]);
+        const div = arr[0] / arr[1];
+
+        if (!results.includes(div)) {
+            results.push(div);
+        }
     }
 
     if (arr[1] % arr[0] == 0) {
-        results.push(arr[1] / arr[0]);
+        const div = arr[1] / arr[0];
+
+        if (!results.includes(div)) {
+            results.push(div);
+        }
     }
 
     return results;

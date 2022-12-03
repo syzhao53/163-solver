@@ -627,7 +627,7 @@ input:focus {
 
 #heart {
   width: 3.5%;
-  padding: 0 0 0 .35rem;
+  padding: 0 .35rem 0 .35rem;
   opacity: 70%;
 }
 
@@ -637,7 +637,7 @@ input:focus {
 
 .footer-wrap {
   height: 3rem;
-  padding: 7rem 0 1rem 0;
+  padding: 9rem 0 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
