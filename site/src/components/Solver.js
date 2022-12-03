@@ -15,13 +15,14 @@ export const aStar = (arr) => {
 
     var ctr = 0;
 
-    while (frontier.size != 0) {
+    while (frontier.size() != 0) {
     // while (ctr < 3) {
         ctr += 1;
         console.log("NOT EMPTY");
         // get top element of frontier priority queue
         console.log("PRINT COLLEC");
         frontier.printCollection();
+        console.log("LENGTH ??: " + frontier.size());
         const currNode = frontier.dequeue();
         console.log("CURRNODE: " + JSON.stringify(currNode));
 
@@ -49,7 +50,7 @@ export const aStar = (arr) => {
             if (is_solved(currNode)) {
                 console.log("SOLVED CONDITION YAY");
 
-                return "SOLVED!!!" + JSON.stringify(moves[JSON.stringify(currNode)]);
+                return moves[JSON.stringify(currNode)];
             }
 
             // arr of successor arrs with computed items
@@ -87,7 +88,7 @@ export const aStar = (arr) => {
         }
     }
 
-    return "HMMM";
+    return null;
 }
 
 export const successors = (arr) => {
@@ -136,19 +137,23 @@ const ops = (arr) => {
     const mult = arr[0] * arr[1];
 
     if (!results.includes(sum)) {
-        results.push([sum, arr[0] + ' + ' + arr[1]]);
+        results.push([sum, arr[0] + ' + ' + arr[1] + ' = ' + sum]);
         //results.push(sum);
 
     }
 
     if (!results.includes(diff) && diff != 0) { // should solutions using 0 be allowed
-        results.push([diff, '|'+ arr[0] + ' - ' + arr[1] + '|']);
+        if (arr[0] - arr[1] < 0) {
+            results.push([diff, arr[1] + ' - ' + arr[0] + ' = ' + diff]);
+        } else {
+            results.push([diff, arr[0] + ' - ' + arr[1] + ' = ' + diff]);
+        }
        // results.push(diff);
 
     }
 
     if (!results.includes(mult)) {
-        results.push([mult, arr[0] + ' * ' + arr[1]]);
+        results.push([mult, arr[0] + ' * ' + arr[1] + ' = ' + mult]);
         //results.push(mult);
 
     }
@@ -157,7 +162,7 @@ const ops = (arr) => {
         const div = arr[0] / arr[1];
 
         if (!results.includes(div)) {
-            results.push([div, arr[0] + ' / ' + arr[1]]);
+            results.push([div, arr[0] + ' / ' + arr[1] + ' = ' + div]);
             //results.push(div);
 
         }
@@ -167,7 +172,7 @@ const ops = (arr) => {
         const div = arr[1] / arr[0];
 
         if (!results.includes(div)) {
-            results.push([div, arr[1] + ' / ' + arr[0]]);
+            results.push([div, arr[1] + ' / ' + arr[0] + ' = ' + div]);
             //results.push(div);
         }
     }

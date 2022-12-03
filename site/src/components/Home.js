@@ -17,24 +17,7 @@ import LeafSVG from '../assets/leaf.svg';
 function Home({ currPage, setCurrPage }) {
   // const [error, setError] = useState({ message: '' });
   // const [lockoutUser, setLockoutUser] = useState('');
-  const navigate = useNavigate();
-
-  // const goToProject = (name) => {
-  //   if (name === 'meetup') {
-  //     navigate('/meetup');
-  //   } else if (name === 'pennintouch') {
-  //     navigate('/pennintouch');
-  //   } else if (name === 'speechconnect') {
-  //     navigate('/speechconnect');
-  //   } else if (name === 'logitech') {
-  //     navigate('/logitech');
-  //   } else if (name === 'chapter') {
-  //     navigate('/chapter');
-  //   } else if (name === 'illustrations') {
-  //     navigate('/illustrations');
-  //   }
-  // };
-
+  
   const [error, setError] = useState({ message: '' });
   const [solution, setSolution] = useState('');
   const [one, setOne] = useState('');
@@ -81,13 +64,36 @@ function Home({ currPage, setCurrPage }) {
 
     if (oneInt == null || twoInt == null || threeInt == null
       || fourInt == null || fiveInt == null || sixInt == null) {
-        setError({ message: 'Please enter six valid values'});
+        setError({ message: 'Valid inputs: 1-13 or A, J, Q, K'});
     } else {
       const solution = aStar(cards);
+      if (solution == null) {
+        setSolution('No solution :/');
+      } else {
+        var solutionArr = [];
+  
+        for (var i = 0; i < solution.length; i += 1) {
+            solutionArr.push((i + 1) + '. ' + solution[i]);
+            solutionArr.push(<br/>);
+        }
+
+        setSolution(solutionArr);
+      }
 
       setError({ message: ''});
-      setSolution('' + solution);
     }
+  }
+
+  const resetForm = (event) => {
+    event.preventDefault();
+    setOne('');
+    setTwo('');
+    setThree('');
+    setFour('');
+    setFive('');
+    setSix('');
+    setError({message: ''});
+    setSolution('');
   }
 
   useEffect(() => {
@@ -111,23 +117,25 @@ function Home({ currPage, setCurrPage }) {
             <div className="big-header">
               163 SOLVER
             </div>
-            <div className="instr">
+            {/* <div className="instr">
               Input 1-13 or J, Q, K, A
-            </div>
+            </div> */}
             <div className="input-row">
-              <input className="input-in" type="text" onChange={event => setOne(event.target.value)}></input>
-              <input className="input-in" type="text" onChange={event => setTwo(event.target.value)}></input>
-              <input className="input-r" type="text" onChange={event => setThree(event.target.value)}></input>
+              <input className="input-in" type="text" value={one} onChange={event => setOne(event.target.value)}></input>
+              <input className="input-in" type="text" value={two} onChange={event => setTwo(event.target.value)}></input>
+              <input className="input-r" type="text" value={three} onChange={event => setThree(event.target.value)}></input>
             </div>
             <div className="input-row-b">
-              <input className="input-in" type="text" onChange={event => setFour(event.target.value)}></input>
-              <input className="input-in" type="text" onChange={event => setFive(event.target.value)}></input>
-              <input className="input-r" type="text" onChange={event => setSix(event.target.value)}></input>
+              <input className="input-in" type="text" value={four} onChange={event => setFour(event.target.value)}></input>
+              <input className="input-in" type="text" value={five} onChange={event => setFive(event.target.value)}></input>
+              <input className="input-r" type="text" value={six} onChange={event => setSix(event.target.value)}></input>
             </div>
-            <div id="error">{error.message}</div>
+            {/* <div id="error">{error.message}</div> */}
             <div className="submit-btn">
+              <button type="button" id="clear" onClick={resetForm}>RESET</button>
               <input type="submit" id="download" value="SOLVE"></input>
             </div>
+            <div id="error">{error.message}</div>
             <div id="solution">{solution}</div>
           </form>
         </div>
