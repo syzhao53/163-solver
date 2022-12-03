@@ -77,17 +77,17 @@ function Home({ currPage, setCurrPage }) {
     const fiveInt = convert(five);
     const sixInt = convert(six);
 
-    console.log(aStar([1, 2, 3, 4, 5, 12]));
+    const cards = [oneInt, twoInt, threeInt, fourInt, fiveInt, sixInt];
 
     if (oneInt == null || twoInt == null || threeInt == null
       || fourInt == null || fiveInt == null || sixInt == null) {
         setError({ message: 'Please enter six valid values'});
     } else {
-      const total = oneInt + twoInt;
-      setError({ message: ''});
-      setSolution('' + total);
-    }
+      const solution = aStar(cards);
 
+      setError({ message: ''});
+      setSolution('' + solution);
+    }
   }
 
   useEffect(() => {

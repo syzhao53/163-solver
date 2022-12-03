@@ -6,46 +6,80 @@ export const aStar = (arr) => {
     const frontier = new PriorityQueue();
     const visited = new Set();
     const costSoFar = {}; // cost is irrelvant right since every solution has same cost (num steps)
+    const moves = {}; // arr: list of ops
     const solutionPath = "";
 
     // initial enqueue of input arr with priority 0
     frontier.enqueue([arr, 0]);
     costSoFar[JSON.stringify(arr)] = 0;
 
+    var ctr = 0;
+
     while (frontier.size != 0) {
+    // while (ctr < 3) {
+        ctr += 1;
         console.log("NOT EMPTY");
         // get top element of frontier priority queue
         console.log("PRINT COLLEC");
         frontier.printCollection();
         const currNode = frontier.dequeue();
+        console.log("CURRNODE: " + JSON.stringify(currNode));
 
         if (!visited.has(currNode)) {
             console.log("NOT VISITED");
             visited.add(currNode);
 
-            if (JSON.stringify(currNode) in costSoFar) {
-                costSoFar[JSON.stringify(currNode)] += 1;
+            // if (JSON.stringify(currNode) in costSoFar) {
+            //     console.log("IN COST ALREADY, INCR");
+            //     costSoFar[JSON.stringify(currNode)] += 1;
+            // } else {
+            //     console.log("ADD TO COST DICT");
+
+            //     costSoFar[JSON.stringify(currNode)] = 0;
+            // }
+
+            if ((JSON.stringify(currNode) in moves)) {
+                costSoFar[JSON.stringify(currNode)] = moves[JSON.stringify(currNode)].length;
             } else {
                 costSoFar[JSON.stringify(currNode)] = 0;
+                moves[JSON.stringify(currNode)] = [];
             }
 
             // solved condition check
             if (is_solved(currNode)) {
-                return "SOLVED!!!";
+                console.log("SOLVED CONDITION YAY");
+
+                return "SOLVED!!!" + JSON.stringify(moves[JSON.stringify(currNode)]);
             }
 
             // arr of successor arrs with computed items
             const successRes = successors(currNode);
+            console.log("PRINT SUCCESSORS: " + JSON.stringify(successRes));
+
 
             // iterate over successors of current array
-            for (var i = 0; i < successRes; i += 1) {
+            for (var i = 0; i < successRes.length; i += 1) {
+                console.log("IN SUCCESS LOOP");
+
                 // current successor
                 const currS = successRes[i][0];
                 const newCost = costSoFar[JSON.stringify(currNode)] + 1;
 
                 if (!(JSON.stringify(currS) in costSoFar) || newCost < costSoFar[JSON.stringify(currS)]) {
+                    const movesCopy = [];
+
+                    for (var j = 0; j < moves[JSON.stringify(currNode)].length; j += 1) {
+                        movesCopy.push(moves[JSON.stringify(currNode)][j]);
+                    }
+
+                    movesCopy.push(successRes[i][1][1]); // append latest op
+                    moves[JSON.stringify(currS)] = movesCopy;
+
                     costSoFar[JSON.stringify(currS)] = newCost;
-                    priority = newCost + heur(successRes[i][1]);
+                    const priority = newCost + heur(successRes[i][0]);
+                    console.log("PRIORITY: " + priority);
+                    // const priority = newCost + heur(successRes[i][1]);
+
                     frontier.enqueue([currS, priority]);
                 }
             }
@@ -67,7 +101,7 @@ export const successors = (arr) => {
 
     for (var i = 0; i < choices.length; i += 1) {
         const opsRes = ops(choices[i]);
-        // console.log(opsRes);
+        // console.log("OPS RES: " + JSON.stringify(opsRes));
 
         for (var j = 0; j < opsRes.length; j += 1) {
             const newArr = [];
@@ -82,7 +116,7 @@ export const successors = (arr) => {
             // console.log("NEW ARR: " + JSON.stringify(newArr));
 
             // add newly computed val
-            newArr.push(opsRes[j]);
+            newArr.push(opsRes[j][0]);
             // console.log("NEW ARR2: " + JSON.stringify(newArr));
 
             // TODO: HANDLE PERMUTATION DUPLICATE SUCCESSORS?
@@ -102,22 +136,30 @@ const ops = (arr) => {
     const mult = arr[0] * arr[1];
 
     if (!results.includes(sum)) {
-        results.push(sum);
+        results.push([sum, arr[0] + ' + ' + arr[1]]);
+        //results.push(sum);
+
     }
 
     if (!results.includes(diff) && diff != 0) { // should solutions using 0 be allowed
-        results.push(diff);
+        results.push([diff, '|'+ arr[0] + ' - ' + arr[1] + '|']);
+       // results.push(diff);
+
     }
 
     if (!results.includes(mult)) {
-        results.push(mult);
+        results.push([mult, arr[0] + ' * ' + arr[1]]);
+        //results.push(mult);
+
     }
     
     if (arr[0] % arr[1] == 0) {
         const div = arr[0] / arr[1];
 
         if (!results.includes(div)) {
-            results.push(div);
+            results.push([div, arr[0] + ' / ' + arr[1]]);
+            //results.push(div);
+
         }
     }
 
@@ -125,7 +167,8 @@ const ops = (arr) => {
         const div = arr[1] / arr[0];
 
         if (!results.includes(div)) {
-            results.push(div);
+            results.push([div, arr[1] + ' / ' + arr[0]]);
+            //results.push(div);
         }
     }
 
@@ -138,8 +181,12 @@ export const choose = (arr, k, prefix=[]) => {
     return arr.flatMap((v, i) => choose(arr.slice(i+1), k-1, [...prefix, v]));
 }
 
-const heur = (val) => {
-    return 163 - val;
+const heur = (arr) => {
+    // should it actually be the largest value in the array subtracted from 163
+
+    // return Math.abs(163 - val);
+    console.log("PRIOR ARR: " + JSON.stringify(arr));
+    return Math.abs(163 - Math.max(...arr));
 }
 
 const is_solved = (arr) => {
