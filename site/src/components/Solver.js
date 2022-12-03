@@ -20,6 +20,13 @@ export const aStar = (arr) => {
         const currNode = frontier.dequeue();
 
         if (!visited.has(currNode)) {
+    while (frontier.size() != 0) {
+
+        // get top element of frontier priority queue
+        frontier.printCollection();
+        const currNode = frontier.dequeue();
+
+        if (!visited.has(currNode)) {
             visited.add(currNode);
 
             // if (JSON.stringify(currNode) in costSoFar) {
@@ -48,6 +55,11 @@ export const aStar = (arr) => {
 
             // iterate over successors of current array
             for (var i = 0; i < successRes.length; i += 1) {
+
+
+            // iterate over successors of current array
+            for (var i = 0; i < successRes.length; i += 1) {
+
                 // current successor
                 const currS = successRes[i][0];
                 const newCost = costSoFar[JSON.stringify(currNode)] + 1;
@@ -64,6 +76,7 @@ export const aStar = (arr) => {
 
                     costSoFar[JSON.stringify(currS)] = newCost;
                     const priority = newCost + heur(successRes[i][0]);
+
                     // const priority = newCost + heur(successRes[i][1]);
 
                     frontier.enqueue([currS, priority]);
@@ -175,7 +188,7 @@ const heur = (arr) => {
     // should it actually be the largest value in the array subtracted from 163
 
     // return Math.abs(163 - val);
-    // console.log("PRIOR ARR: " + JSON.stringify(arr));
+
     return Math.abs(163 - Math.max(...arr));
 }
 

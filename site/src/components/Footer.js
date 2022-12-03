@@ -9,13 +9,10 @@ function Footer() {
   return (
     <div className="Footer">
       <div className="footer-wrap">
-        <div className="footer-row">
-          {/* <div className="footer-text">syzhao@sas.upenn.edu</div> */}
-        </div>
         <div id="made-with-love" className="footer-row">
           <div className="footer-text">Made by Sylvia &middot; 2022</div>
           {/* <img id="heart" src={Heart} alt="heart svg" /> */}
-          {/* <div className="footer-text">by Sylvia</div> */}
+          {/* <div className="footer-text">by Sylvia &middot; 2022</div> */}
         </div>
       </div>
     </div>
