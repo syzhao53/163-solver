@@ -14,8 +14,10 @@ export const aStar = (arr) => {
     costSoFar[JSON.stringify(arr)] = 0;
 
     while (frontier.size() != 0) {
+        // console.log("NOT EMPTY");
         // get top element of frontier priority queue
         const currNode = frontier.dequeue();
+        // console.log("======CURRNODE=======: " + JSON.stringify(currNode));
 
         if (!visited.has(currNode)) {
             visited.add(currNode);
@@ -89,12 +91,25 @@ export const successors = (arr) => {
 
         for (var j = 0; j < opsRes.length; j += 1) {
             const newArr = [];
+            var bool1 = true;
+            var bool2 = true;
 
             for (var k = 0; k < arr.length; k += 1) {
                 // copy array but without the two elements chosen
-                if ((arr[k] != choices[i][0]) && (arr[k] != choices[i][1])) {
-                    newArr.push(arr[k]);
+                // if ((arr[k] != choices[i][0]) && (arr[k] != choices[i][1])) {
+                //     newArr.push(arr[k]);
+                // }
+                if ((arr[k] == choices[i][0]) && bool1) {
+                    bool1 = false;
+                    continue;
                 }
+
+                if (arr[k] == choices[i][1] && bool2) {
+                    bool2 = false;
+                    continue;
+                }
+
+                newArr.push(arr[k]);
             }
 
             // console.log("NEW ARR: " + JSON.stringify(newArr));
