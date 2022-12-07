@@ -84,6 +84,24 @@ function Home({ currPage, setCurrPage }) {
     }
   }
 
+  const generate = (event) => {
+    const vals = ['A', 'J', 'Q', 'K', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+    var randomArr = [];
+    
+    for (var i = 0; i < 6; i += 1) {
+      randomArr.push(Math.floor(Math.random() * vals.length));
+    }    
+    
+    setOne(vals[randomArr[0]]);
+    setTwo(vals[randomArr[1]]);
+    setThree(vals[randomArr[2]]);
+    setFour(vals[randomArr[3]]);
+    setFive(vals[randomArr[4]]);
+    setSix(vals[randomArr[5]]);
+    setError({message: ''});
+    setSolution('');
+  }
+
   const resetForm = (event) => {
     event.preventDefault();
     setOne('');
@@ -115,7 +133,7 @@ function Home({ currPage, setCurrPage }) {
 
           <form className="input-form" id="solver-form">
             <div className="big-header">
-<img id="leaf-icon" src={Leaf} alt="leaf icon" onClick={async () => {navigate('/');}}/>
+            <img id="leaf-icon" src={Leaf} alt="leaf icon" onClick={generate}/>
               163 SOLVER
             </div>
             {/* <div className="instr">

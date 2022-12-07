@@ -488,10 +488,14 @@ input:focus {
 }
 
 #leaf-icon {
-  display: none;
-  /* width: 9.2%;
+  display: block;
+  width: 9%;
   float: left;
-  margin: 0 .5rem 0 0; */
+  margin: 0 .55rem 0 0;
+}  
+
+#leaf-icon:hover {
+  cursor: pointer;
 }
 
 .logo-text {
