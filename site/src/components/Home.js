@@ -85,7 +85,7 @@ function Home({ currPage, setCurrPage }) {
   }
 
   const generate = (event) => {
-    const vals = ['A', 'J', 'Q', 'K', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+    const vals = ['A', 'J', 'Q', 'K', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
     var randomArr = [];
     
     for (var i = 0; i < 6; i += 1) {
