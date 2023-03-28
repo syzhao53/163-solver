@@ -103,6 +103,7 @@ function Home({ currPage, setCurrPage }) {
     setSix(vals[randomArr[5]]);
     setError({message: ''});
     setSolution('');
+    setSolved(false);
   }
 
   const resetForm = (event) => {
@@ -137,7 +138,7 @@ function Home({ currPage, setCurrPage }) {
 
           <form className="input-form" id="solver-form">
             <div className="big-header">
-<img id="leaf-icon" src={Leaf} alt="leaf icon" onClick={async () => {navigate('/');}}/>
+            <img id="leaf-icon" src={Leaf} alt="leaf icon" onClick={generate}/>
               163 SOLVER
             </div>
             {/* <div className="instr">
