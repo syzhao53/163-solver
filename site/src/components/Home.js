@@ -139,7 +139,7 @@ function Home({ currPage, setCurrPage }) {
           <form className="input-form" id="solver-form">
             <div className="big-header">
             <img id="leaf-icon" src={Leaf} alt="leaf icon" onClick={generate}/>
-              163 SOLVER test
+              163 SOLVER
             </div>
             {/* <div className="instr">
               Input 1-13 or J, Q, K, A
