@@ -52,6 +52,13 @@ html {
     }
   }
 
+#accord-title {
+  font-size: .8rem;
+  font-weight: 550;
+  letter-spacing: .5px;;
+  color: #033E57; 
+}
+
 #error {
   text-align: left;
   color: #d6384d;

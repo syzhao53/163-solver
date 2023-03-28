@@ -13,6 +13,7 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import Leaf from '../assets/leaf.png';
 import LeafSVG from '../assets/leaf.svg';
+import Solution from './Solution';
 
 function Home({ currPage, setCurrPage }) {
   // const [error, setError] = useState({ message: '' });
@@ -20,6 +21,7 @@ function Home({ currPage, setCurrPage }) {
   
   const [error, setError] = useState({ message: '' });
   const [solution, setSolution] = useState('');
+  const [solved, setSolved] = useState(false);
   const [one, setOne] = useState('');
   const [two, setTwo] = useState('');
   const [three, setThree] = useState('');
@@ -70,6 +72,7 @@ function Home({ currPage, setCurrPage }) {
       if (solution == null) {
         setSolution('No solution :/');
       } else {
+        setSolved(true);
         var solutionArr = [];
   
         for (var i = 0; i < solution.length; i += 1) {
@@ -84,6 +87,24 @@ function Home({ currPage, setCurrPage }) {
     }
   }
 
+  const generate = (event) => {
+    const vals = ['A', 'J', 'Q', 'K', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+    var randomArr = [];
+    
+    for (var i = 0; i < 6; i += 1) {
+      randomArr.push(Math.floor(Math.random() * vals.length));
+    }    
+    
+    setOne(vals[randomArr[0]]);
+    setTwo(vals[randomArr[1]]);
+    setThree(vals[randomArr[2]]);
+    setFour(vals[randomArr[3]]);
+    setFive(vals[randomArr[4]]);
+    setSix(vals[randomArr[5]]);
+    setError({message: ''});
+    setSolution('');
+  }
+
   const resetForm = (event) => {
     event.preventDefault();
     setOne('');
@@ -94,6 +115,7 @@ function Home({ currPage, setCurrPage }) {
     setSix('');
     setError({message: ''});
     setSolution('');
+    setSolved(false);
   }
 
   useEffect(() => {
@@ -137,7 +159,8 @@ function Home({ currPage, setCurrPage }) {
               <button type="button" id="download" onClick={solveForm}>SOLVE</button>
             </div>
             <div id="error">{error.message}</div>
-            <div id="solution">{solution}</div>
+            {/* <div id="solution">{solution}</div> */}
+            {solved ? <Solution solution={solution}/> : solution}
           </form>
         </div>
       </div>
