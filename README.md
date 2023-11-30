@@ -1,1 +1,3 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-f059dc9a6f8d3a56e377f745f24479a46679e63a5d9fe6f495e02850cd0d8118.svg)](https://classroom.github.com/online_ide?assignment_repo_id=7022238&assignment_repo_type=AssignmentRepo)
+Solver for the game 163 using an A* algorithm. Input 6 numbers from 1-12 and see how to make 163 using addition, subtraction, multiplication, and division.
+
+Based on the game 24: https://en.wikipedia.org/wiki/24_(puzzle)
